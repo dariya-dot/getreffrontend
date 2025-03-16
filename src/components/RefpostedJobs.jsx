@@ -38,7 +38,7 @@ const RefpostedJobs = () => {
     <div>
      
      
-      <section class="text-gray-600 text-sm md:text-base mt-14 pt-24 md:mt-0 md:pt-10 body-font">
+      <section class="text-gray-600 mb-10 text-sm md:text-base mt-14 pt-24 md:mt-0 md:pt-10 body-font">
       <div class="container px-1 mt-8 mx-auto">
         <div className="flex justify-evenly items-center">
         <center className="  text-gray-800 text-xl font-medium mb-5 inline-block border-b-4 pb-2 border-green-600 " >Posted jobs  </center>
