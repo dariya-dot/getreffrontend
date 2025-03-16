@@ -1,0 +1,17 @@
+.iamgeAndData{
+    display: flex;
+   gap: 20px;
+
+}
+.salaryData{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 40px;
+}
+.nonimage{
+
+    width: 100%;
+
+    
+
+}
