@@ -12,7 +12,7 @@ import RefjobpostForm from './components/RefjobpostForm';
 import RefpostedJobs from './components/RefpostedJobs';
 import RefjobApplication from './components/RefjobApplication';
 import Userdetailspost from './components/Userdetailspost';
-import RefDetailsUpload from './components/refDetailsUpload';
+import RefDetailsUpload from './components/RefDetailsUpload';
 import RefLandingPage from './pages/RefLandingPage';
 import Userdashbord from './components/Userdashbord';
 
