@@ -18,7 +18,7 @@ import Userdashbord from './components/Userdashbord';
 
 import FooterSection from './components/FooterSection';
 import Faqs from './components/footer/Faqs';
-import TermsAndConditions from './components/footer/termsAndConditions';
+import TermsAndConditions from './components/footer/TermsAndConditions';
 import PrivacyPolicy from './components/footer/PrivacyPolicy';
 
 const App = () => {
