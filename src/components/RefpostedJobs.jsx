@@ -38,7 +38,7 @@ const RefpostedJobs = () => {
     <div>
      
      
-      <section class="text-gray-600 mb-10 text-sm md:text-base mt-14 pt-24 md:mt-0 md:pt-10 body-font">
+      <section class="text-gray-600 min-h-[60vh] mb-10 text-sm md:text-base mt-14 pt-24 md:mt-0 md:pt-10 body-font">
       <div class="container px-1 mt-8 mx-auto">
         <div className="flex justify-evenly items-center">
         <center className="  text-gray-800 text-xl font-medium mb-5 inline-block border-b-4 pb-2 border-green-600 " >Posted jobs  </center>
@@ -75,9 +75,9 @@ const RefpostedJobs = () => {
                   month: "long",
                   day: "numeric",
                 })}</p>
-                  <h2 class="text-gray-700 text-base w-full  md:text-lg title-font font-medium">
+                  <h2 class="text-gray-700 text-base w-full   md:text-lg title-font font-medium flex flex-col md:flex-row md:justify-between ">
                      
-                  🏢 {item.companyName} &nbsp;  {"  "}  <span className="ml-14">📌{item.City}</span>
+                  <span>🏢 {item.companyName} </span><span className="">📍 {""}{item.City}</span>
                     </h2>
                   <div class="flex-grow">
                     <p class="leading-relaxed text-base">

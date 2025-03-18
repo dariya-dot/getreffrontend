@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { CiCircleRemove } from "react-icons/ci";
 import { backendAPI } from "../../API";
 const ReferlSignin = () => {
 
@@ -70,7 +70,7 @@ const ReferlSignin = () => {
       } else if (data.message === "Please Enter the valid email") {
         alert("Please Enter the valid email");
       } else {
-      
+ 
         setOtpButton(true);
       }
     } catch (error) {
@@ -91,7 +91,7 @@ const ReferlSignin = () => {
         if(data.message==='you entered wrong otp'){
             alert("you entered wrong otp")
         }
-        else if(data.data.otp===''){
+        else if(data.message=== "user authenticated sussfully"){
             alert('registation done')
             navigate('/')
         }
@@ -107,19 +107,17 @@ const ReferlSignin = () => {
 
   return (
    
-   
+
+      <div className="flex justify-center mt-14 pt-24 md:py-5 md:mt-7 md:mb-0 items-center min-h-screen bg-gray-800 relative">
       
-      
-
-
-
-
-
-      <div className="flex justify-center mt-14 pt-24 md:py-5 md:mt-4 md:mb-0 items-center min-h-screen bg-gray-800">
-        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 mt-4 rounded-lg p-8 flex flex-col w-full max-w-md">
+        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 mt-4 rounded-lg p-8 flex flex-col w-full max-w-md relative">
+        <div className="absolute top-5 right-4  text-3xl hover:text-gray-950 cursor-pointer text-gray-600">
+      <CiCircleRemove onClick={()=>navigate('/')} />
+    </div>
           {!otpButton ? (
             <form onSubmit={signUp === "signup" ? signUpHandler : signHandler}>
               <center className="text-xl font-medium ">Join Now & Start Referring!</center>
+              
               <h2 className="text-gray-900 text-xl font-medium title-font mb-5">
                 <center>{signUp === "signup" ? "Sign Up" : "Sign In"}</center>
                
@@ -180,6 +178,18 @@ const ReferlSignin = () => {
                   Click Here
                 </span>
               </p>
+              <p className="text-sm text-gray-500 mt-3 text-center">
+             ForgetPassword ?
+              <span
+                onClick={() =>{ navigate('/refforgetpassword');
+                  }
+                 
+                }
+                className="text-blue-700 bg-white-600 cursor-pointer font-medium ml-3"
+              >
+                Click Here
+              </span>
+            </p>
             </form>
           ) : (
             <form onSubmit={otpsubmit}>

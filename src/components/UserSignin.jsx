@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { CiCircleRemove } from "react-icons/ci";
 import { backendAPI } from "../../API";
 const UserSignin = () => {
   const navigate = useNavigate();
   const [signUp, SetSignUp] = useState("signup");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [otpButton, setOtpButton] = useState(false);
@@ -64,7 +65,11 @@ const UserSignin = () => {
         alert("User already registered");
       } else if (data.message === "Please Enter the valid email") {
         alert("Please Enter the valid email");
-      } else {
+      } else if(data.message ===
+        "Your account was not verified and has been removed. Please register again."){
+          alert("Your account was not verified and has been removed. Please register again.")
+        }
+       else {
         setOtpButton(true);
       }
     } catch (error) {
@@ -86,7 +91,7 @@ const UserSignin = () => {
       if (data.message === "you entered wrong otp") {
         alert("you entered wrong otp");
       } else if (data.data.otp === "") {
-        alert("registation done");
+        alert("registation done please login");
 
         navigate("/");
       }
@@ -96,8 +101,12 @@ const UserSignin = () => {
   };
 
   return (
-    <div className="flex justify-center text-sm mt-10 md:mt-0 md:pt-5 pt-24 items-center min-h-screen bg-gray-100">
-      <div className="lg:w-2/6 md:w-1/2 bg-gray-700 mt-4 mx-1 my-3 rounded-lg p-8 flex flex-col w-full max-w-md">
+    <div className="flex justify-center text-sm mt-10 md:mt-7 md:pt-5 pt-24 items-center min-h-screen bg-gray-100 relative">
+      <div className="lg:w-2/6 md:w-1/2 bg-gray-700 mt-4 mx-1 my-3 rounded-lg p-8 flex flex-col w-full max-w-md relative">
+               <div className="absolute top-5 right-4  text-3xl hover:text-gray-450 cursor-pointer text-gray-100">
+                                          <CiCircleRemove onClick={()=>navigate('/')} />
+                                        </div>
+                                        <br />
         {!otpButton ? (
           <form onSubmit={signUp === "signup" ? signUpHandler : signHandler}>
             <h2 className="text-gray-100 text-xl font-medium title-font mb-5">
@@ -148,6 +157,7 @@ const UserSignin = () => {
                 required
               />
             </div>
+       
 
             <button
               type="submit"
@@ -169,6 +179,18 @@ const UserSignin = () => {
                 Click Here
               </span>
             </p>
+            <p className="text-sm text-gray-100 mt-3 text-center">
+             ForgetPassword ?
+              <span
+                onClick={() =>
+                  navigate('/forgetpassword')
+                }
+                className="text-blue-500 bg-white-600 cursor-pointer font-medium ml-3"
+              >
+                Click Here
+              </span>
+            </p>
+          
           </form>
         ) : (
           <form onSubmit={otpsubmit}>
@@ -177,7 +199,7 @@ const UserSignin = () => {
             </h2>
 
             <div className="relative mb-4">
-              <label className="leading-7 text-sm text-gray-600">
+              <label className="leading-7 text-sm text-gray-300">
                 Enter OTP
               </label>
               <input

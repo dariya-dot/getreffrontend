@@ -20,13 +20,17 @@ import FooterSection from './components/FooterSection';
 import Faqs from './components/footer/Faqs';
 import TermsAndConditions from './components/footer/TermsAndConditions';
 import PrivacyPolicy from './components/footer/PrivacyPolicy';
+import UserforgetPassword from './components/UserforgetPassword';
+import UserReset from './components/UserReset';
+import RefForgetPassword from './components/RefForgetPassword';
+import RefReset from './components/RefReset';
 
 const App = () => {
   return (
    
       <ErrorBoundary>
         <NavSection />
-   
+
         <Routes>
           
           <Route path='/usersignin' element={<UserSignin/>}/>
@@ -45,6 +49,11 @@ const App = () => {
           <Route path='/faq' element={   <Faqs/>}/>
           <Route path='/terms' element={  <TermsAndConditions/>}/>
           <Route path='/privacy' element={  <PrivacyPolicy/>}/>
+          <Route path='/forgetpassword' element={      <UserforgetPassword/>}/>
+          <Route path='/forgetpassword/:resetToken' element={<UserReset/>}/>
+          <Route path='/refforgetpassword/:resetToken' element={<RefReset/>}/>
+          <Route path='/refforgetpassword' element={<RefForgetPassword/>}/>
+
 
         </Routes>
      <FooterSection/>

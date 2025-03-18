@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { backendAPI } from '../../API';
 const Userdetailspost = () => {
     const [state, setState] = useState("");
-    
+        const [city, setCity] = useState("");
     const token=localStorage.getItem("usertoken")
     const [photo,SetPhoto] = useState(null);
     const [resume,setResume] = useState(null);
@@ -87,6 +87,7 @@ const Userdetailspost = () => {
       formDataToSend.append("git", formData.git);
       formDataToSend.append("linkedIn", formData.linkedIn);
       formDataToSend.append("state", state);
+      formDataToSend.append("city", city);
      
       if (photo) formDataToSend.append("photo", photo);
       if (resume) formDataToSend.append("resume", resume);
@@ -105,6 +106,10 @@ const Userdetailspost = () => {
          })
          const data= await response.json()
          console.log(data)
+         if(response.ok){
+          alert("you details are updated")
+          window.location.reload()
+         }
             
         }
          catch (error) {
@@ -158,7 +163,21 @@ return (
             ))}
           </select>
           
-         
+         {/* City Dropdown */}
+         <label className="block mb-1 font-medium">City</label>
+          <select
+            className="w-full p-2 border rounded mb-4"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            disabled={!state}
+            required 
+          >
+            <option value="">Select City</option>
+            {state && statesAndCities[state].map((city) => (
+              <option key={city} value={city}>{city}</option>
+            ))}
+          </select>
+          
           
           {/* Experience */}
           <label className="block mb-2 font-medium"> Experience</label>

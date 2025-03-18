@@ -84,6 +84,7 @@ const RefjobpostForm = () => {
           formDataToSend.append("minExp", formData.minExp);
           formDataToSend.append("Vacancy", formData.Vacancy);
           formDataToSend.append("lastDate", formData.lastDate);
+          formDataToSend.append("salary", formData.salary);
           formDataToSend.append("State", state);
           formDataToSend.append("City", city);
           formDataToSend.append("jobType", jobType);

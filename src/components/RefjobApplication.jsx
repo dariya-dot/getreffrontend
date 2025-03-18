@@ -80,11 +80,11 @@ const deleteJob=async()=>{
             {refjobs.companyName || "Company Name"}
           </p>
           <p className="text-sm text-gray-500">
-            💼 {refjobs.jobType || "Full-time"} | 📍{" "}
+            💼 {refjobs.jobType || "Full-time"} |      {''} 📍
             {refjobs.State || "Location"} {","} {refjobs.City || "Location"}
           </p>
           <p className="text-lg font-semibold text-green-600 mt-2">
-            💵 ₹ {refjobs.salary || "Not disclosed"}
+            💵 ₹ {refjobs.salary || "Salary Not Disclosed."}
           </p>
 
           <div className="mt-4">
