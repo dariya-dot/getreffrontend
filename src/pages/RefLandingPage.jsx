@@ -6,26 +6,27 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const RefLandingPage = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const { referrerId } = useParams();
   const [referrerData, setReferrerData] = useState({});
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-const token=localStorage.getItem("reftoken")
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const token = localStorage.getItem("reftoken");
   const getRefHandler = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${backendAPI}/referer/get/${referrerId}`,{
-       method:"GET", 
-       headers:{
-          token:token
-        }
+      const response = await fetch(`${backendAPI}/referer/get/${referrerId}`, {
+        method: "GET",
+        headers: {
+          token: token,
+        },
       });
       const data = await response.json();
       if (data) {
         setReferrerData(data.data);
-        setJobs(data.jobs)
+        setJobs(data.jobs);
         console.log(data.jobs);
       }
     } catch (error) {
@@ -35,12 +36,31 @@ const token=localStorage.getItem("reftoken")
       setLoading(false);
     }
   };
+  const deleteJob = async (x) => {
+    try {
+      const response = await fetch(`${backendAPI}/jobref/delete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({ refJobId: x, referrerId }),
+      });
+      const data = await response.json();
+      alert("job deleted ");
+      navigation(`/refjobdetails/${referrerId}`);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getRefHandler();
   }, []);
   return (
-    <div className="bg-gray-200" >
-            <br />
+    <div className="bg-gray-200">
+      <br />
       <center>
         {" "}
         {error && <p className="text-red-500">{error}</p>}
@@ -58,7 +78,9 @@ const token=localStorage.getItem("reftoken")
                 className="w-20 h-20 rounded-full border-4 border-blue-500"
               />
               <div>
-                <h2 className="text-2xl font-bold capitalize">{referrerData.name}</h2>
+                <h2 className="text-2xl font-bold capitalize">
+                  {referrerData.name}
+                </h2>
                 <p className="text-gray-500 capitalize">
                   {" "}
                   <span className="text-gray-900 ">Working At : </span>
@@ -90,64 +112,90 @@ const token=localStorage.getItem("reftoken")
               </p>
             </div>
 
-          
-
-
             <div className="mt-6">
-      <h3 className="text-lg font-semibold">
-        Referred Jobs ({referrerData?.referedJobs?.length ?? 0})
-      </h3>
-      <div className="mt-2 space-y-4 capitalize">
-        {referrerData?.referedJobs?.length > 0 ? (
-          jobs.map((job, index) => (
-            <div
-              key={index}
-              className="p-4 bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center"
-            >
-              {/* Job Details */}
-              <div onClick={() => navigate(`/jobapplication/${job._id}`)} className="cursor-pointer w-full sm:w-auto">
-                <h4 className="text-lg font-semibold text-gray-800">{job.companyName}</h4>
-                <ul className="mt-2 text-gray-600 text-sm space-y-1">
-                  <li>
-                    <strong>Job Title:</strong> {job.jobTitle || "Not specified"}
-                  </li>
-                  <li>
-                    <strong>Salary:</strong> {job.salary ? `₹ ${job.salary}` : "Not specified"}
-                  </li>
-                  <li>
-                    <strong>Location:</strong> {job.City}, {job.State}
-                  </li>
-                  <li>
-                    <strong>Posted on:</strong> {new Date(job.postedDate).toLocaleDateString()}
-                  </li>
-                  <li>
-                  <strong>Job Application :</strong> {job?.application?.length}
-                  </li>
-                </ul>
-              </div>
+              <h3 className="text-lg font-semibold">
+                Referred Jobs ({referrerData?.referedJobs?.length ?? 0})
+              </h3>
+              <div className="mt-2 space-y-4 capitalize">
+                {referrerData?.referedJobs?.length > 0 ? (
+                  jobs.map((job, index) => (
+                    <div
+                      key={index}
+                      className="p-4 bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center"
+                    >
+                      {/* Job Details */}
+                      <div
+                        onClick={() => navigate(`/jobapplication/${job._id}`)}
+                        className="cursor-pointer w-full sm:w-auto"
+                      >
+                        <h4 className="text-lg font-semibold text-gray-800">
+                          {job.companyName}
+                        </h4>
+                        <ul className="mt-2 text-gray-600 text-sm space-y-1">
+                          <li>
+                            <strong>Job Title:</strong>{" "}
+                            {job.jobTitle || "Not specified"}
+                          </li>
+                          <li>
+                            <strong>Salary:</strong>{" "}
+                            {job.salary ? `₹ ${job.salary}` : "Not specified"}
+                          </li>
+                          <li>
+                            <strong>Location:</strong> {job.City}, {job.State}
+                          </li>
+                          <li>
+                            <strong>Posted on:</strong>{" "}
+                            {new Date(job.postedDate).toLocaleDateString()}
+                          </li>
+                          <li>
+                            <strong>Job Application :</strong>{" "}
+                            {job?.application?.length}
+                          </li>
+                        </ul>
+                      </div>
 
-              {/* Delete Button */}
+                      {/* Delete Button */}
+                      <button
+                         onClick={() => setIsModalOpen(true)}
+                        className="mt-4 sm:mt-0 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition"
+                      >
+                        Delete
+                      </button>
+                      {isModalOpen && (
+        <>
+         
+
+          
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg">
+            <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
+            <p className="mb-4">Are you sure you want to delete this job application?</p>
+            <div className="flex justify-end space-x-4">
               <button
-                // onClick={() => onDelete(job._id)}
-                className="mt-4 sm:mt-0 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition"
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                onClick={() => setIsModalOpen(false)}
               >
-                Delete
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                onClick={() => deleteJob(job._id)}
+              >
+                Confirm
               </button>
             </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No jobs referred yet.</p>
-        )}
-      </div>
-    </div>
-
-      
- 
-
-
-
-
-
+          </div>
+        </div>
+     
+        </>
+      )}
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">No jobs referred yet.</p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       ) : (
