@@ -66,7 +66,7 @@ const FooterSection = () => {
                     target="blank"
                     className="text-gray-400 hover:text-white"
                   >
-                    📩 Where Our Service Runs
+                    🌐 Where Our Service Runs
                   </a>
                 </li>
               </ul>
