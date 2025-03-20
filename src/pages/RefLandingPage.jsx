@@ -42,7 +42,7 @@ const RefLandingPage = () => {
         {loading && <p className="text-gray-500">Loading...</p>}
       </center>
       {referrerData ? (
-        <div className="min-h-screen  capitalize bg-gray-200 p-6 pt-24 md:pt-5 mt-14 flex flex-col items-center">
+        <div className="min-h-screen min-h-[70vh] capitalize bg-gray-200 p-6 pt-24 md:pt-5 mt-14 flex flex-col items-center">
           {/* Profile Card */}
           <div className="w-full max-w-4xl bg-white shadow-lg rounded-2xl p-6">
             {/* Profile Section */}
