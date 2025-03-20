@@ -116,7 +116,7 @@ const RefLandingPage = () => {
                     <strong>Posted on:</strong> {new Date(job.postedDate).toLocaleDateString()}
                   </li>
                   <li>
-                    <strong>Job Application :</strong>{jobs?.application?.length || 0}
+                  <strong>Job Application :</strong> {jobs?.application?.length ?? 0}
                   </li>
                 </ul>
               </div>
