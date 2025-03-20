@@ -53,7 +53,7 @@ const FooterSection = () => {
                 </li>
                 <li>
                   <a
-                    href="/report"
+                    href="/report-issue"
                     target="blank"
                     className="text-gray-400 hover:text-white"
                   >
@@ -74,12 +74,12 @@ const FooterSection = () => {
               <p className="text-sm text-gray-400">
   📞 WhatsApp:  
   <a
-    href="https://wa.me/91XXXXXXXXXX"
+    href="https://wa.me/918331003877"
     target="_blank"
     rel="noopener noreferrer"
     className="text-green-500 hover:underline"
   >
-    +91 XXXXXXXXXX
+    +91 8331003877
   </a>
 </p>
 
@@ -95,12 +95,12 @@ const FooterSection = () => {
                 <a href="#" className="text-gray-400 hover:text-white text-lg">
                   <FaTwitter />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white text-lg">
+                <a href="https://www.linkedin.com/in/get-reference"   rel="noopener noreferrer" target="_blank" className="text-gray-400 hover:text-white text-lg">
                   <FaLinkedinIn />
                 </a>
                 <a
-                  href="https://wa.me/yourwhatsappnumber"
-                  target="_blank"
+                  href="https://wa.me/918331003877"
+                  target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white text-lg"
                 >
@@ -109,7 +109,7 @@ const FooterSection = () => {
 
              
                 <a
-                  href="https://www.instagram.com/yourusername"
+                  href="https://www.instagram.com/getreference.site?igsh=aXRyYmxxbXJiY2V0"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white text-lg"

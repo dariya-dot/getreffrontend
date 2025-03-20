@@ -175,7 +175,7 @@ const Refjobs = () => {
             currentJobs.map((item, index) => (
               <div key={index} className="md:py-5 flex flex-wrap md:flex-nowrap">
                 <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                  <span className="font-semibold text-xl title-font font-medium text-gray-700">
+                  <span className="font-semibold text-xl title-font font-medium text-gray-700 capitalize">
                     {item.jobTitle}
                   </span>
                   <span className="mt-1 text-gray-500 text-sm">
@@ -190,13 +190,13 @@ const Refjobs = () => {
                   </span>
                 </div>
                 <div className="md:flex-grow">
-                  <h2 className="text-base md:text-xl font-medium text-gray-900 title-font mb-2">
+                <h2 className="text-base md:text-xl capitalize font-medium text-gray-900 title-font mb-2">
                     {item.companyName}
                   </h2>
-                  <p className="leading-relaxed md:text-lg font-medium text-black ">
+                  <p className="leading-relaxed capitalize md:text-lg font-medium text-black ">
                     📌 {item.City}
                   </p>
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed capitalize">
                     {item.jobDescription.substring(0, 200)}...
                   </p>
                   <Link to={`/get/${item._id}`} className="text-indigo-500 inline-flex items-center mt-4">

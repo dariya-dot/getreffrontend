@@ -59,6 +59,7 @@ const RefDetailsUpload = () => {
          }   
          else{
           alert("profile updated")
+          window.location.reload()
          }
         }
          catch (error) {

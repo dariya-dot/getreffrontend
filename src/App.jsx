@@ -24,13 +24,14 @@ import UserforgetPassword from './components/UserforgetPassword';
 import UserReset from './components/UserReset';
 import RefForgetPassword from './components/RefForgetPassword';
 import RefReset from './components/RefReset';
+import Report from './components/footer/Report';
 
 const App = () => {
   return (
    
       <ErrorBoundary>
         <NavSection />
-
+     
         <Routes>
           
           <Route path='/usersignin' element={<UserSignin/>}/>
@@ -52,8 +53,9 @@ const App = () => {
           <Route path='/forgetpassword' element={      <UserforgetPassword/>}/>
           <Route path='/forgetpassword/:resetToken' element={<UserReset/>}/>
           <Route path='/refforgetpassword/:resetToken' element={<RefReset/>}/>
+          <Route path='/refforgetpassword/:resetToken' element={<RefReset/>}/>
           <Route path='/refforgetpassword' element={<RefForgetPassword/>}/>
-
+          <Route path='/report-issue' element={   <Report/>}/>
 
         </Routes>
      <FooterSection/>
