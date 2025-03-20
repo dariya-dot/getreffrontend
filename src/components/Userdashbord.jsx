@@ -10,6 +10,8 @@ const Userdashbord = () => {
   const [application, setApplications] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [refJobId,setRefJobId]=useState()
+   const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 const navigate=useNavigate()
   const cancleRequest=async()=>{
     try {
@@ -34,6 +36,7 @@ const navigate=useNavigate()
  
   const fetchUserDetails = async () => {
     try {
+      setLoading(true);
       const response = await fetch(`${backendAPI}/user/get/${userId}`);
       const data = await response.json();
       if (data) {
@@ -49,6 +52,10 @@ const navigate=useNavigate()
       }
     } catch (error) {
       console.log(error);
+      setError("Failed to load data. Please try again.");
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -57,6 +64,11 @@ const navigate=useNavigate()
   }, []);
   return (
     <>
+      <center>
+        {" "}
+        {error && <p className="text-red-500">{error}</p>}
+        {loading && <p className="text-gray-500">Loading...</p>}
+      </center>
       {user ? (
         <>
           <div className="pt-24 min-h-[70vh] mt-14 md:mt-0 text-sm px-2 max-w-6xl mx-auto ">
