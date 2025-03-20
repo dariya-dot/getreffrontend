@@ -35,6 +35,10 @@ const ReferlSignin = () => {
       else if(data.message === "Email and password are incorrect"){
         alert('Email and password are incorrect')
       }
+      else if(data. message===
+        "Your account was not verified and has been removed. Please register again."){
+          alert('Your account was not verified and has been removed. Please register again')
+        }
       else{
         alert('userlogin is sucessfull')
         localStorage.setItem("reftoken",data.token)

@@ -30,7 +30,12 @@ const UserSignin = () => {
         alert("This email is not registered");
       } else if (data.message === "Email and password are incorrect") {
         alert("Email and password are incorrect");
-      } else {
+      }
+      else if(data.message===
+        "Your account was not verified and has been removed. Please register again."){
+          console.log("Your account was not verified and has been removed. Please register again.")
+        }
+       else {
         alert("userlogin is sucessfull");
         localStorage.setItem("usertoken", data.token);
         localStorage.setItem("userId",data.data._id)
