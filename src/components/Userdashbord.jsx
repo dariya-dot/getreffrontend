@@ -41,7 +41,6 @@ const navigate=useNavigate()
       const data = await response.json();
       if (data) {
         console.log(data);
-
         setUser(data.data);
         if (data.application) {
           setApplications(data.application);
@@ -67,7 +66,7 @@ const navigate=useNavigate()
     
       {user ? (
         <>
-          <div className="pt-24 min-h-[70vh] mt-14 md:mt-0 text-sm px-2 max-w-6xl mx-auto ">
+          <div className="pt-24 min-h-screen mt-14 md:mt-0 text-sm px-2 max-w-6xl mx-auto ">
           <center>
         {" "}
         {error && <p className="text-red-500">{error}</p>}
