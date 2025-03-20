@@ -43,6 +43,8 @@ const ReferlSignin = () => {
         alert('userlogin is sucessfull')
         localStorage.setItem("reftoken",data.token)
         localStorage.setItem('referrerId',data.refId)
+        localStorage.removeItem("usertoken")
+        localStorage.removeItem("userId")
         const referrerId=data.data._id
         navigate(`/refdashbord/${referrerId}`);
 

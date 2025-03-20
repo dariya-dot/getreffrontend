@@ -39,6 +39,8 @@ const UserSignin = () => {
         alert("userlogin is sucessfull");
         localStorage.setItem("usertoken", data.token);
         localStorage.setItem("userId",data.data._id)
+        localStorage.removeItem("reftoken")
+        localStorage.removeItem("referrerId")
         const userId=data.data._id
         setEmail("");
         setPassword("");
