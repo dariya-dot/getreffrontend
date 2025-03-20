@@ -149,7 +149,7 @@ const Refjobs = () => {
         {/* Job Listings */}
         <div className="-mt-18 divide-y-2 min-h-[60vh] divide-gray-100">
           {loading ? (
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center min-h-screen items-center">
               <svg
                 className="animate-spin h-8 w-8 text-blue-500"
                 viewBox="0 0 24 24"

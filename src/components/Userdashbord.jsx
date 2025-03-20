@@ -7,33 +7,13 @@ import { useNavigate } from "react-router-dom";
 const Userdashbord = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
-  const [application, setApplications] = useState(null);
+  const [application, setApplications] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [refJobId,setRefJobId]=useState()
-   const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-const navigate=useNavigate()
-  const cancleRequest=async()=>{
-    try {
-      const response= await fetch(`${backendAPI}/user/job_delete`,
-        {
-          method:"POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body:JSON.stringify({userId,refJobId})
+  const [refJobId, setRefJobId] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-        }
-      )
-      const data= await response.json()
-      window.location.reload()
-      console.log(data)
-
-    } catch (error) {
-      console.error(error)
-    }
-  }
- 
   const fetchUserDetails = async () => {
     try {
       setLoading(true);
@@ -52,31 +32,46 @@ const navigate=useNavigate()
     } catch (error) {
       console.log(error);
       setError("Failed to load data. Please try again.");
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
-
+  const cancleRequest = async () => {
+    try {
+      const response = await fetch(`${backendAPI}/user/job_delete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, refJobId }),
+      });
+      const data = await response.json();
+      window.location.reload();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     fetchUserDetails();
   }, []);
   return (
-    <>
-    
+    <div className="bg-gray-200 min-h-screen py-2">
+        <center>
+            {" "}
+            {error && <p className="text-red-500">{error}</p>}
+            {loading && <p className="text-gray-500">Loading...</p>}
+          </center>
       {user ? (
         <>
-          <div className="pt-24 min-h-screen mt-14 md:mt-0 text-sm px-2 max-w-6xl mx-auto ">
-          <center>
-        {" "}
-        {error && <p className="text-red-500">{error}</p>}
-        {loading && <p className="text-gray-500">Loading...</p>}
-      </center>
+        
+
+          <div className="pt-24  mt-14 md:mt-0 text-sm px-2 max-w-4xl mx-auto ">
             <h1 className="text-3xl font-bold  text-center text-gray-800 mb-6">
               User Dashboard
             </h1>
 
-            <div className="border rounded-lg md:text-base lg:text-xl xl:text-xl shadow-lg p-6 bg-white">
+            <div className="border rounded-2xl md:text-base  xl:text-xl shadow-lg p-6 bg-white">
               {/* Profile Section */}
               <div className="flex items-center space-x-4 mb-6">
                 {user.photo ? (
@@ -91,7 +86,9 @@ const navigate=useNavigate()
                   </div>
                 )}
                 <div>
-                  <p className="text-lg md:text-base lg:text-lg font-semibold">{user.name}</p>
+                  <p className="text-lg md:text-base  font-semibold">
+                    {user.name}
+                  </p>
                   <p className="text-gray-600 md:text-base lg:text-lg">
                     {user.profession || "Not specified"}
                   </p>
@@ -99,7 +96,7 @@ const navigate=useNavigate()
               </div>
 
               {/* Grid Layout */}
-              <div className="grid grid-cols-1 md:text-base lg:text-lg sm:grid-cols-2 gap-2  sm:gap-4 md:gap-5 lg:gap-6">
+              <div className="grid grid-cols-1 md:text-base  sm:grid-cols-2 gap-2  sm:gap-4 md:gap-5 lg:gap-6">
                 <p>
                   <strong>Email:</strong> {user.email}
                 </p>
@@ -216,7 +213,7 @@ const navigate=useNavigate()
 
             <div>
               {user.appliedJobs.length > 0 ? (
-                <section class="bg-white text-sm  py-8  antialiased dark:bg-gray-900 md:py-16">
+                <section class="bg-gray-100 text-sm my-2 py-4 rounded-lg antialiased dark:bg-gray-800 md:py-16">
                   <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
                     <div class="gap-4 sm:flex sm:items-center sm:justify-between">
                       <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
@@ -271,7 +268,6 @@ const navigate=useNavigate()
                                   onClick={() => {
                                     setIsModalOpen(true);
                                     setRefJobId(job._id);
-
                                   }}
                                   type="button"
                                   class="w-full rounded-lg border border-red-700 px-3 py-2 text-center text-sm font-medium text-red-700 hover:bg-red-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900 lg:w-auto"
@@ -279,17 +275,16 @@ const navigate=useNavigate()
                                   Cancel Request
                                 </button>
                                 <button
-                                onClick={()=>{
-                                  // setRefJobId(job._id)
-                                  navigate(`/get/${job._id}`)
-                                    }}
-                                  
+                                  onClick={() => {
+                                    // setRefJobId(job._id)
+                                    navigate(`/get/${job._id}`);
+                                  }}
                                   class="w-full inline-flex justify-center rounded-lg  border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 lg:w-auto"
                                 >
                                   View details
                                 </button>
                               </div>
-                            </div>    
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -297,7 +292,12 @@ const navigate=useNavigate()
                   </div>
                 </section>
               ) : (
-                <p className="text-gray-500">No applied jobs found.</p>
+                <center>
+                  {" "}
+                  <p className="text-gray-500 text-base py-4 inline-flex justify-center">
+                    No applied jobs found.
+                  </p>
+                </center>
               )}
             </div>
           </div>
@@ -307,33 +307,31 @@ const navigate=useNavigate()
       )}
       {isModalOpen && (
         <>
-         
-
-          
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg">
-            <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
-            <p className="mb-4">Are you sure you want to delete this job application?</p>
-            <div className="flex justify-end space-x-4">
-              <button
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                onClick={() => setIsModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                onClick={cancleRequest}
-              >
-                Confirm
-              </button>
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded shadow-lg">
+              <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
+              <p className="mb-4">
+                Are you sure you want to delete this job application?
+              </p>
+              <div className="flex justify-end space-x-4">
+                <button
+                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                  onClick={cancleRequest}
+                >
+                  Confirm
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-     
         </>
       )}
-    </>
+    </div>
   );
 };
 
