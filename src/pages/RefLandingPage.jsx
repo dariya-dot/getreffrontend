@@ -90,7 +90,7 @@ const RefLandingPage = () => {
 
             <div className="mt-6">
       <h3 className="text-lg font-semibold">
-        Referred Jobs ({referrerData?.referedJobs?.length || 0})
+        Referred Jobs ({referrerData?.referedJobs?.length ?? 0})
       </h3>
       <div className="mt-2 space-y-4 capitalize">
         {referrerData?.referedJobs?.length > 0 ? (
