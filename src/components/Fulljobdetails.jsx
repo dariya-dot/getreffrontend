@@ -9,6 +9,7 @@ const Fulljobdetails = () => {
   const [hasRequested, setHasRequested] = useState(true);
   const { refJobId } = useParams();
   const [singleJob, setSingleJobs] = useState({});
+  const token=localStorage.getItem("reftoken")
 
   const userId = localStorage.getItem("userId");
   console.log("ref id", refJobId);
@@ -19,7 +20,13 @@ const Fulljobdetails = () => {
   };
   const fullJobHandler = async () => {
     try {
-      const response = await fetch(`${backendAPI}/jobref/job/${refJobId}`);
+      const response = await fetch(`${backendAPI}/jobref/job/${refJobId}`,
+        {
+          method:"GET",
+          headers:{
+            token:token
+          }
+        });
       const data = await response.json();
       console.log(" API response format:", data.data);
       setSingleJobs(data.data || {});
