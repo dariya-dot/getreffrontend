@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Userdashbord = () => {
+  const token=localStorage.getItem("usertoken")
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [application, setApplications] = useState([]);
@@ -17,7 +18,12 @@ const Userdashbord = () => {
   const fetchUserDetails = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${backendAPI}/user/get/${userId}`);
+      const response = await fetch(`${backendAPI}/user/get/${userId}`,{
+        headers: {
+          token: token, // Pass token correctly in headers
+          "Content-Type": "application/json"  // Include content type if needed
+        }
+      });
       const data = await response.json();
       if (data) {
         console.log(data);

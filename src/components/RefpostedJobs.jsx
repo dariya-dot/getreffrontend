@@ -6,6 +6,7 @@ const RefpostedJobs = () => {
   const [refjobs, setRefJobs] = useState([]);
   const { referrerId } = useParams();
   const [sortOrder, setSortOrder] = useState("desc"); 
+  const token=localStorage.getItem("reftoken")
   console.log(referrerId);
   console.log(refjobs);
   const refjobHandler = async () => {
@@ -14,6 +15,9 @@ const RefpostedJobs = () => {
         `${backendAPI}/jobref/referrer/${referrerId}`,
         {
           method: "GET",
+          headers:{
+            token:token
+          }
         }
       );
       const data = await response.json();

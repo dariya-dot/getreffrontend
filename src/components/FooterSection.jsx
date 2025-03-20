@@ -60,6 +60,15 @@ const FooterSection = () => {
                     📩 Report an Issue
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/service"
+                    target="blank"
+                    className="text-gray-400 hover:text-white"
+                  >
+                    📩 Where Our Service Runs
+                  </a>
+                </li>
               </ul>
             </div>
 

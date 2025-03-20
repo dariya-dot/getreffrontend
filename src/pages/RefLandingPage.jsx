@@ -12,11 +12,16 @@ const RefLandingPage = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+const token=localStorage.getItem("reftoken")
   const getRefHandler = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${backendAPI}/referer/get/${referrerId}`);
+      const response = await fetch(`${backendAPI}/referer/get/${referrerId}`,{
+       method:"GET", 
+       headers:{
+          token:token
+        }
+      });
       const data = await response.json();
       if (data) {
         setReferrerData(data.data);

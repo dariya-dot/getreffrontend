@@ -9,6 +9,7 @@ const RefjobApplication = () => {
   const { refJobId } = useParams();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const referrerId=localStorage.getItem("referrerId")
+    const token=localStorage.getItem("reftoken")
 
   console.log("Ref Job ID from front end:", refJobId);
 
@@ -20,6 +21,7 @@ const deleteJob=async()=>{
           method:"POST",
           headers: {
             "Content-Type": "application/json",
+            token:token
           },
           body:JSON.stringify({refJobId,referrerId})
 
@@ -39,7 +41,12 @@ const deleteJob=async()=>{
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
-        const response = await fetch(`${backendAPI}/jobref/job/${refJobId}`);
+        const response = await fetch(`${backendAPI}/jobref/job/${refJobId}`,{
+          method:"GET",
+          headers:{
+            token:token
+          }
+        });
         const data = await response.json();
         console.log("Job Data:", data);
         setRefJobs(data.data || {});
@@ -51,7 +58,12 @@ const deleteJob=async()=>{
     const fetchApplicants = async () => {
       try {
         const response = await fetch(
-          `${backendAPI}/jobref/job/application/${refJobId}`
+          `${backendAPI}/jobref/job/application/${refJobId}`,{
+            method:"GET",
+            headers:{
+              token:token
+            }
+          }
         );
         const data = await response.json();
         console.log("Applicants Data:", data);
@@ -65,7 +77,7 @@ const deleteJob=async()=>{
       fetchJobDetails();
       fetchApplicants();
     }
-  }, [refJobId]);
+  }, [refJobId,token]);
 
   return (
     <>
@@ -310,7 +322,7 @@ const deleteJob=async()=>{
 
           {applicants.length == 0 && (
             <div className="flex justify-center items-center h-full">
-              <p className="text-gray-500">
+              <p className="text-gray-200">
                 No one requested for the reference
               </p>
             </div>
